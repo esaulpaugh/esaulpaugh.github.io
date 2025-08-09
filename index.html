@@ -11,6 +11,7 @@
 <br>
 <input id="argsInput" type="text" placeholder='Arguments like -3, true...' style="width: 400px;" />
 <br>
+<button id="example">Example</button>
 <button id="gogoBtn">Encode</button>
 <pre id="output"></pre>
 <pre id="output2"></pre>
@@ -29,6 +30,11 @@
       const FunctionClass = await cjHeadlong.com.esaulpaugh.headlong.abi.Function;
 
       output.textContent = "When ready, press Encode.";
+
+      example.onclick = async () => {
+          sigBox.value = "foo(int32,bool)";
+          argsBox.value = "-3, true";
+      }
 
       gogo.onclick = async () => {
           output.textContent = "Encoding...";
