@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Headlong In-Browser Demo</title>
+        <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+    </head>
+    <body>
+        <h1>Headlong Demo</h1>
+        <pre id="output"></pre>
+
+        <script type="module">
+            await cheerpjInit();
+
+            const cj = await cheerpjRunLibrary("/app/headlong-13.3.1.jar");
+
+            try {
+              const HeadlongFunction = await cj.com.esaulpaugh.headlong.abi.Function;
+              const func = await new HeadlongFunction("foo(uint256,address)");
+              const str = await func.toString();
+              document.getElementById("output").textContent = "headlong says: " + str;
+            } catch (e) {
+              document.getElementById("output").textContent = "Error: " + e;
+            }
+        </script>
+    </body>
+</html>
