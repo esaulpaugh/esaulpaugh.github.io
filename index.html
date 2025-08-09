@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Headlong In-Browser Demo</title>
-        <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
-    </head>
-    <body>
-        <h1>Headlong Demo</h1>
-        <pre id="output"></pre>
+<head>
+    <meta charset="UTF-8" />
+    <title>Headlong In-Browser Demo</title>
+    <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+</head>
+<body>
+<h1>Headlong Demo</h1>
+<pre id="output"></pre>
 
-        <script type="module">
-            await cheerpjInit();
+<script type="module">
+    async function main() {
+      const output = document.getElementById("output");
+      output.textContent = "Starting CheerpJ...";
 
-            const cj = await cheerpjRunLibrary("/app/headlong-13.3.1.jar");
+      try {
+        await cheerpjInit();
+        output.textContent = "CheerpJ initialized. Loading headlong...";
 
-            try {
-              const HeadlongFunction = await cj.com.esaulpaugh.headlong.abi.Function;
-              const func = await new HeadlongFunction("foo(uint256,address)");
-              const str = await func.toString();
-              document.getElementById("output").textContent = "headlong says: " + str;
-            } catch (e) {
-              document.getElementById("output").textContent = "Error: " + e;
-            }
-        </script>
-    </body>
+        const cjHeadlong = await cheerpjRunLibrary("/app/headlong-13.3.2-SNAPSHOT.jar");
+        output.textContent = "JAR loaded. Creating Function instance...";
+
+        const FunctionClass = await cjHeadlong.com.esaulpaugh.headlong.abi.Function;
+        const fn = await new FunctionClass("foo(uint256,bytes)");
+
+        output.textContent = "Function instance created:\n" + await fn.toString();
+      } catch (e) {
+        output.textContent = "Error: " + e;
+        console.error(e);
+      }
+    }
+
+    main();
+</script>
+</body>
 </html>
