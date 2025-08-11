@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Headlong In-browser ABI Encode Demo</title>
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Demo the Headlong Java library in your browser. Example inputs provided.">
+    <link rel="canonical" href="https://esaulpaugh.github.io/headlong-demo.html">
+    <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+</head>
+<body>
+<h1>Headlong Encode Demo</h1>
+<input id="sigInput" type="text" placeholder='Signature like foo(int32,bool)...' style="width: 400px;" />
+<br>
+<input id="argsInput" type="text" placeholder='Arguments like -3, true...' style="width: 400px;" />
+<br>
+<button id="example">Example</button>
+<button id="gogoBtn">Encode</button>
+<pre id="output"></pre>
+<pre id="output2"></pre>
+
+<script type="module">
+    async function main() {
+      const output = document.getElementById("output");
+      const sigBox = document.getElementById("sigInput");
+      const argsBox = document.getElementById("argsInput");
+      const gogo = document.getElementById("gogoBtn");
+
+      output.textContent = "Loading...";
+
+      await cheerpjInit();
+      const cjHeadlong = await cheerpjRunLibrary("/app/headlong-13.3.2-SNAPSHOT.jar");
+      const FunctionClass = await cjHeadlong.com.esaulpaugh.headlong.abi.Function;
+
+      output.textContent = "When ready, press Encode.";
+
+      example.onclick = async () => {
+          sigBox.value = "foo(int32,bool)";
+          argsBox.value = "-3, true";
+      }
+
+      gogo.onclick = async () => {
+          output.textContent = "Encoding...";
+
+          try {
+            const fn = await new FunctionClass(sigBox.value);
+            let args = JSON.parse("[" + argsBox.value + "]");
+
+            const byteBuffer = await fn.encodeCallWithArgs(...args);
+
+            const Strings = await cjHeadlong.com.esaulpaugh.headlong.util.Strings;
+            const hex = await Strings.encode(byteBuffer);
+
+            output.textContent = "Calldata hex:\n" + hex;
+            output2.textContent = await fn.toString();
+          } catch (e) {
+            output.textContent = "Error: " + e;
+            console.error(e);
+          }
+      };
+    }
+
+    main();
+</script>
+<div style="text-align:left; font-weight:normal; margin-bottom:1em;">
+    <p><a href="index.html">Index</a></p>
+</div>
+</body>
+</html>
