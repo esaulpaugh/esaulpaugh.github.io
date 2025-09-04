@@ -62,26 +62,46 @@
           margin: 0 0 0.5em 0;
         }
         .epigraph {
-          font-style:italic;
           font-size:0.95rem;
           line-height:1.55;
           color:#555;
-          max-width:45ch;
+          max-width:58ch;
           margin:2rem auto;
           text-align:center;
           position:relative;
         }
-        .epigraph::before,
-        .epigraph::after {
-          content:"";
-          position:absolute;
-          left:50%;
-          width:30%;
-          height:1px;
-          background:#bbb;
+        .epigraph-text {
+          font-family: serif;
+          display: inline-block;
+          margin: 0.22em 1em;
         }
-        .epigraph::before { top:-0.8rem;  transform:translateX(-50%); }
-        .epigraph::after  { bottom:-0.8rem; transform:translateX(-50%); }
+        .epigraph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 50ch;
+            margin: 3rem auto;
+            text-align: center;
+        }
+        .side-dingbats {
+            color:#555;
+            font-size: 1em;
+            line-height: 1;
+        }
+        .side-dingbats.left {
+            text-align: right;
+        }
+        .side-dingbats.right {
+            text-align: left;
+        }
+        .epigraph-box {
+            flex: 1;
+        }
+        .epigraph-box p.epigraph {
+            margin: 0;
+            line-height: 1.6;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -128,7 +148,24 @@
     <span style="display:inline-block; margin:0 1.5em;">☩</span>
 </p>
 <p class="chapter-title">Chapitre Premier</p>
-<p class="epigraph">«&#8239;Le pugiliste de papier frappe sans jamais lever le gant. Il te noie sous les formulaires, te hache les jambes avec méthode. C’est un combat sans sang, mais qui peut te tuer pareil.&#8239;»</p>
+<div class="epigraph-container">
+    <div class="side-dingbats left">❁<br>❁<br>❁<br>❁<br>❁<br>❁<br>❁<br>❁<br>❁
+    </div>
+    <div class="epigraph-box">
+        <p class="epigraph">
+            <span style="letter-spacing:0.01em; ">❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁</span>
+            <br>
+            <span class="epigraph-text">
+              <em>Le pugiliste de papier frappe sans jamais lever le gant.
+              Il te noie sous les formulaires, te hache les jambes avec méthode.
+              C’est un combat sans sang, mais qui peut te tuer pareil.</em>
+            </span>
+            <br>
+            <span style="letter-spacing:0.01em; ">❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁ ❁</span>
+        </p>
+    </div>
+    <div class="side-dingbats right">❁<br>❁<br>❁<br>❁<br>❁<br>❁<br>❁<br>❁<br>❁</div>
+</div>
 <br>
 <div class="chapter">
     <p>Le train ralentissait. Il repéra les palmiers. Signe infaillible. Ils apparurent, les façades luisantes.</p>
