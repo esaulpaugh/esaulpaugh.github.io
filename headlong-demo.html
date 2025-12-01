@@ -53,7 +53,7 @@
             const hex = await Strings.encode(byteBuffer);
 
             output.textContent = "Calldata hex:\n" + hex;
-            output2.textContent = await fn.toString();
+            output2.textContent = await fn["toString()"]();
           } catch (e) {
             output.textContent = "Error: " + e;
             console.error(e);
