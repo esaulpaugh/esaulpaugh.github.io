@@ -44,16 +44,16 @@
           output.textContent = "Encoding...";
 
           try {
-            const fn = await new FunctionClass(sigBox.value);
+            const fn = new FunctionClass(sigBox.value);
             let args = JSON.parse("[" + argsBox.value + "]");
 
-            const byteBuffer = await fn.encodeCallWithArgs(...args);
+            const byteBuffer = fn.encodeCallWithArgs(...args);
 
-            const Strings = await cjHeadlong.com.esaulpaugh.headlong.util.Strings;
-            const hex = await Strings.encode(byteBuffer);
+            const Strings = cjHeadlong.com.esaulpaugh.headlong.util.Strings;
+            const hex = Strings.encode(byteBuffer);
 
             output.textContent = "Calldata hex:\n" + hex;
-            output2.textContent = await fn.toString();
+            output2.textContent = fn.toJson(true);
           } catch (e) {
             output.textContent = "Error: " + e;
             console.error(e);
