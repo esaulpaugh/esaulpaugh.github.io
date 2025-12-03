@@ -30,7 +30,7 @@
       output.textContent = "Loading...";
 
       await cheerpjInit();
-      const cjHeadlong = await cheerpjRunLibrary("/app/headlong-13.3.2-SNAPSHOT.jar");
+      const cjHeadlong = await cheerpjRunLibrary("/app/headlong-13.3.2-SNAPSHOT-fat.jar");
       const FunctionClass = await cjHeadlong.com.esaulpaugh.headlong.abi.Function;
 
       output.textContent = "When ready, press Encode.";
