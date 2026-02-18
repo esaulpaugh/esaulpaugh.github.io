@@ -8,4 +8,4 @@ https://esaulpaugh.github.io/index.html
 
 ---
 
-© 2025 Evan Saulpaugh — Tous droits réservés.
+© 2025-2026 Evan Saulpaugh — Tous droits réservés.
