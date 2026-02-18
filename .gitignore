@@ -1,0 +1,18 @@
+/bin
+/build
+/classes
+/out
+/src/jmh/generated
+/target
+/.gradle
+/.idea
+/.settings
+.classpath
+.navigation
+*.iml
+*.log
+gradle.properties
+/.vscode/settings.json
+
+# macOS
+.DS_Store
